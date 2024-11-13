@@ -1,0 +1,58 @@
+logging:
+  config: file:logback.xml
+  
+server:
+  port: 8083
+  
+spring:
+  jackson:
+    date-format: dd-MM-yyyy hh:mm:ss a
+    time-zone: Asia/Karachi
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://localhost:1433;database=DB;
+    username: root
+    password: root
+    sqlScriptEncoding: UTF-8
+    tomcat.connection-properties: useUnicode=yes;characterEncoding=utf-8;
+    hikari:
+      connection-test-query: SELECT 1
+      minimum-idle: 8
+      maximum-pool-size: 24
+      pool-name: sql-pool
+      auto-commit: true
+      max-lifetime: 1800000
+      leak-detection-threshold: 60000
+  jpa:
+    show-sql: false
+    generate-ddl: false
+    open-in-view: false
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    hibernate: 
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+        format_sql: true
+        #globally_quoted_identifiers: true
+        id.new_generator_mappings: false
+        default_schema: dbo
+        generate_statistics: false    #to see batch statistics
+        order_inserts: true          #batch insert
+        order_updates: true          #batch update
+        batch_versioned_data: true   #batch update
+        jdbc:
+           batch_size: 30            #batch insert size  
+           
+swagger:
+  enabled: true
+     
+api:
+  title: MPAY Response Simulator
+  description: REST Services
+  version: 1.0
+  contact:
+    email: abc@example.com
+    name: ABC
+    link: http://www.google.com/            
